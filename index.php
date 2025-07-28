@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php 
+=======
+<?php
+>>>>>>> afa8dee (Initial commit)
 // Require toàn bộ các file khai báo môi trường, thực thi,...(không require view)
 
 // Require file Common
@@ -19,6 +23,18 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     // Trang chủ
+<<<<<<< HEAD
     '/'=>(new ProductController())->Home(),
 
 };
+=======
+    '/' => (new ProductController())->Home(),
+    // '/admin' => (new ProductController())->admin(),
+    '/products'     => (new ProductController())->list(),
+    '/detail'       => (new ProductController())->detail(),
+    '/about'        => (new PageController())->about(),
+    '/contact'      => (new PageController())->contact(),
+    '/login'        => (new AuthController())->login(),
+    '/register'     => (new AuthController())->register(),
+};
+>>>>>>> afa8dee (Initial commit)
