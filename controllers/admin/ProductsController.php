@@ -14,12 +14,14 @@ class ProductsController
     public function index()
     {
         $products = $this->productModel->getAll();
-        require './views/admin/products/list.php';
+        $viewFile = './views/admin/products/list.php';
+        include './views/admin/layout.php';
     }
 
     public function add()
     {
-        require './views/admin/products/add.php';
+        $viewFile = './views/admin/products/add.php';
+        include './views/admin/layout.php';
     }
 
     public function store()
@@ -45,8 +47,10 @@ class ProductsController
     {
         $id = $_GET['id'] ?? null;
         if (!$id) die('Không tìm thấy sản phẩm');
+
         $product = $this->productModel->getById($id);
-        require './views/admin/products/edit.php';
+        $viewFile = './views/admin/products/edit.php';
+        include './views/admin/layout.php';
     }
 
     public function update()

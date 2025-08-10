@@ -12,6 +12,8 @@ require_once './controllers/ProductController.php';
 require_once './controllers/UserController.php';
 require_once './controllers/admin/DashboardController.php';
 require_once './controllers/admin/ProductsController.php';
+require_once './controllers/admin/UsersController.php';
+
 
 
 
@@ -20,6 +22,8 @@ require_once './controllers/admin/ProductsController.php';
 require_once './models/ProductModel.php';
 require_once './models/UserModel.php';
 require_once './models/ProductsModel.php';
+require_once './models/UsersModel.php';
+
 
 // Route
 $act = $_GET['act'] ?? '/home';
@@ -48,6 +52,17 @@ match ($act) {
     'admin/products/update' => (new ProductsController())->update(),
     'admin/products/delete' => (new ProductsController())->delete(),
 
+    // Quản lý người dùng (Admin)
+    'admin/users' => (new UsersController())->index(),
+    'admin/users/add' => (new UsersController())->add(),
+    'admin/users/store' => (new UsersController())->store(),
+    'admin/users/edit' => (new UsersController())->edit(),
+    'admin/users/update' => (new UsersController())->update(),
+    'admin/users/delete' => (new UsersController())->delete(),
+
+
+
     // Dashboard (Admin)
-    'admin' => (new DashboardController())->adminHome(),
+    'admin'           => (new DashboardController())->index(),
+    'admin/dashboard' => (new DashboardController())->index(),
 };

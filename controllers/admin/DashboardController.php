@@ -3,11 +3,7 @@ class DashboardController
 {
     public function index()
     {
-        require_once './views/admin/dashboard.php';
-    }
-
-    public function adminHome()
-    {
-        require_once './views/admin/admin_home.php';
+        $viewFile = './views/admin/dashboard.php';
+        include './views/admin/layout.php';
     }
 }
