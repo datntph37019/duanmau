@@ -19,6 +19,7 @@ require_once './controllers/admin/ProductsController.php';
 // Require toàn bộ file Models
 require_once './models/ProductModel.php';
 require_once './models/UserModel.php';
+require_once './models/ProductsModel.php';
 
 // Route
 $act = $_GET['act'] ?? '/home';
@@ -30,11 +31,6 @@ match ($act) {
     // Trang chủ
 
 
-    '/'             => (new ProductController())->home(),
-    // '/admin' => (new ProductController())->admin(),
-    '/products'     => (new ProductController())->list(),
-    '/detail'       => (new ProductController())->detail(),
-
 
     //dangki, dangnhhap
     'home' => (new HomeController())->index(),
@@ -43,4 +39,15 @@ match ($act) {
     'login' => (new UserController())->showLoginForm(),
     'login-submit' => (new UserController())->loginSubmit(),
     'logout' => (new UserController())->logout(),
+
+    // Quản lý sản phẩm (Admin)
+    'admin/products' => (new ProductsController())->index(),
+    'admin/products/add' => (new ProductsController())->add(),
+    'admin/products/store' => (new ProductsController())->store(),
+    'admin/products/edit' => (new ProductsController())->edit(),
+    'admin/products/update' => (new ProductsController())->update(),
+    'admin/products/delete' => (new ProductsController())->delete(),
+
+    // Dashboard (Admin)
+    'admin' => (new DashboardController())->adminHome(),
 };
