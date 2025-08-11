@@ -1,28 +1,43 @@
 <?php
 class ProductController
 {
+    private $productModel;
+    private $categoryModel;
+
+
+    public function __construct()
+    {
+        require_once __DIR__ . '/../models/ProductModel.php';
+        require_once __DIR__ . '/../models/CategoriesModel.php';
+        $this->productModel = new ProductModel();
+        $this->categoryModel = new CategoriesModel();
+    }
+
     public function index()
     {
-        // Gọi model để lấy dữ liệu sản phẩm
-        require_once __DIR__ . '/../models/ProductModel.php';
-        $model = new ProductModel();
-        $products = $model->getAll();
+        $categoryId = $_GET['category_id'] ?? null;
+        if ($categoryId && is_numeric($categoryId)) {
+            $products = $this->productModel->getByCategory($categoryId);
+        } else {
+            $products = $this->productModel->getAll();
+        }
 
-        // Load view hiển thị sản phẩm cho user
+        $categories = $this->categoryModel->getAll();
+
         require_once __DIR__ . '/../views/list.php';
     }
 
-    public function detail($id)
+    public function detail()
     {
-        require_once __DIR__ . '/../models/ProductModel.php';
-        $model = new ProductModel();
-        $product = $model->getById($id);
+        $id = $_GET['id'] ?? null;
 
-        if (!$product) {
-            echo "Sản phẩm không tồn tại!";
+        if (!$id || !is_numeric($id)) {
+            header('Location: index.php?act=products');
             exit;
         }
 
-        require_once __DIR__ . '/../views/detail.php';
+        $product = $this->productModel->findById($id);
+
+        include PATH_ROOT . 'views/detail.php';
     }
 }

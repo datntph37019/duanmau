@@ -42,6 +42,7 @@ match ($act) {
     // Trang chủ
     'home' => (new HomeController())->index(),
     'products' => (new ProductController())->index(),
+    'product/detail' => (new ProductController())->detail(),
 
 
 

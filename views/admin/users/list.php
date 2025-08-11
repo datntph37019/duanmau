@@ -1,93 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <title>Danh sách người dùng</title>
     <style>
-        /* Tiêu đề */
-        h2 {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9fafb;
+            margin: 40px;
             color: #333;
         }
 
-        /* Bảng danh sách */
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
         table {
             width: 100%;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            background-color: #fff;
-            border-radius: 6px;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        table th {
-            background-color: #2c3e50;
+        thead tr {
+            background-color: #dae4b5ff;
             color: white;
-            padding: 10px;
             text-align: left;
+            font-weight: 600;
+            font-size: 16px;
         }
 
-        table td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
+        thead tr th {
+            padding: 14px 20px;
         }
 
-        /* Hover trên dòng */
-        table tr:hover {
-            background-color: #f5f5f5;
+        tbody tr {
+            background-color: #fff;
+            transition: background-color 0.2s ease;
         }
 
-        /* Nút hành động */
-        table a {
+        tbody tr:hover {
+            background-color: #f0f8ff;
+        }
+
+        tbody tr td {
+            padding: 14px 20px;
+            vertical-align: middle;
+            border-bottom: 1px solid #e1e5eb;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Các nút hành động */
+        .actions a {
+            color: #2c3e50;
             text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 13px;
+            font-weight: 600;
+            margin-right: 12px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            font-size: 14px;
         }
 
-        table a[href*="edit"] {
-            background-color: #3498db;
-            color: white;
-        }
-
-        table a[href*="delete"] {
+        /* Nút Xóa đỏ */
+        .actions a.delete {
             background-color: #e74c3c;
             color: white;
+            border-color: #e74c3c;
         }
 
-        table a:hover {
-            opacity: 0.85;
+        .actions a.delete:hover {
+            background-color: #c0392b;
+            border-color: #c0392b;
+            color: white;
+            text-decoration: none;
         }
     </style>
 </head>
 
 <body>
     <h2>Danh sách người dùng</h2>
-    <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Quyền</th>
-            <th>Hành động</th>
-        </tr>
-        <?php foreach ($users as $u): ?>
+    <table>
+        <thead>
             <tr>
-                <td><?= $u['id'] ?></td>
-                <td><?= $u['email'] ?></td>
-                <td><?= $u['role'] ?></td>
-                <td>
-                    <a href="?act=admin/users/delete&id=<?= $u['id'] ?>" onclick="return confirm('Xóa người dùng này?')">Xóa</a>
-                </td>
+                <th style="width:10%;">ID</th>
+                <th style="width:45%;">Email</th>
+                <th style="width:25%;">Quyền</th>
+                <th style="width:20%;">Hành động</th>
             </tr>
-        <?php endforeach; ?>
+        </thead>
+        <tbody>
+            <?php foreach ($users as $u): ?>
+                <tr>
+                    <td><?= $u['id'] ?></td>
+                    <td><?= htmlspecialchars($u['email']) ?></td>
+                    <td><?= htmlspecialchars($u['role']) ?></td>
+                    <td class="actions">
+                        <a href="?act=admin/users/delete&id=<?= $u['id'] ?>" class="delete" onclick="return confirm('Xóa người dùng này?')">Xóa</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
     </table>
-
 </body>
 
 </html>

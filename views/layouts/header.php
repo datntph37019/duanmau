@@ -252,7 +252,7 @@ $currentAct = $_GET['act'] ?? '';
 <header class="main-header">
     <div class="container">
         <div class="brand">
-            <div class="logo-tag">ADIDAS</div>
+            <div class="logo-tag">POLY </div>
             <small>store</small>
         </div>
 
@@ -261,7 +261,7 @@ $currentAct = $_GET['act'] ?? '';
         <div class="nav-wrap">
             <nav class="main-nav">
                 <a href="?act=home" class="<?= $currentAct === 'home' ? 'active' : '' ?>">Trang Chủ</a>
-                <a href="?act=product" class="<?= $currentAct === 'product' ? 'active' : '' ?>">Sản Phẩm</a>
+                <a href="?act=products" class="<?= $currentAct === 'products' ? 'active' : '' ?>">Sản Phẩm</a>
                 <a href="?act=contact" class="<?= $currentAct === 'contact' ? 'active' : '' ?>">Liên hệ</a>
                 <a href="?act=about" class="<?= $currentAct === 'about' ? 'active' : '' ?>">Giới Thiệu</a>
             </nav>

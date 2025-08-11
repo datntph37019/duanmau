@@ -16,12 +16,16 @@ class ProductModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($id)
+    public function findById($id)
     {
-        $sql = "SELECT * FROM san_pham WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt = $this->conn->prepare("SELECT * FROM san_pham WHERE id = ?");
+        $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getByCategory($categoryId)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM san_pham WHERE id_danh_muc = ? ORDER BY id DESC");
+        $stmt->execute([$categoryId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

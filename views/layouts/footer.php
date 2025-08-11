@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -39,4 +39,14 @@
     </footer>
 </body>
 
-</html>
+</html> -->
+<footer style="
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 14px;
+    border-top: 3px solid #444;
+">
+    <p>&copy; 2025 - Website bán quần áo</p>
+</footer>
