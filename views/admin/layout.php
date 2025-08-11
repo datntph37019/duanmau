@@ -64,12 +64,21 @@
     </div>
     <div class="main">
         <div class="header">
-            <span>Xin chào, Admin</span>
+            <?php
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            $email = $_SESSION['user']['email'] ?? 'Khách';
+            $role  = ucfirst($_SESSION['user']['role'] ?? 'Không xác định'); // ucfirst để chữ cái đầu viết hoa
+            ?>
+            <span>Xin chào, <?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($role, ENT_QUOTES, 'UTF-8') ?>)</span>
         </div>
         <div class="content">
             <?php include $viewFile; ?>
         </div>
     </div>
+
 </body>
 
 </html>

@@ -76,7 +76,6 @@ class UserModel
         $stmt->bind_param("i", $id);
         $result = $stmt->execute();
         $stmt->close();
-
         return $result;
     }
 }

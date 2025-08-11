@@ -8,21 +8,28 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
-require_once './controllers/ProductController.php';
+require_once './controllers/AdminProductController.php';
 require_once './controllers/UserController.php';
+require_once './controllers/ProductController.php';
+
 require_once './controllers/admin/DashboardController.php';
 require_once './controllers/admin/ProductsController.php';
 require_once './controllers/admin/UsersController.php';
+require_once './controllers/admin/CategoriesController.php';
+
 
 
 
 
 
 // Require toàn bộ file Models
+
 require_once './models/ProductModel.php';
 require_once './models/UserModel.php';
 require_once './models/ProductsModel.php';
 require_once './models/UsersModel.php';
+require_once './models/CategoriesModel.php';
+
 
 
 // Route
@@ -33,11 +40,13 @@ $act = $_GET['act'] ?? '/home';
 
 match ($act) {
     // Trang chủ
+    'home' => (new HomeController())->index(),
+    'products' => (new ProductController())->index(),
+
 
 
 
     //dangki, dangnhhap
-    'home' => (new HomeController())->index(),
     'register' => (new UserController())->showRegisterForm(),
     'register-submit' => (new UserController())->registerSubmit(),
     'login' => (new UserController())->showLoginForm(),
@@ -54,15 +63,95 @@ match ($act) {
 
     // Quản lý người dùng (Admin)
     'admin/users' => (new UsersController())->index(),
-    'admin/users/add' => (new UsersController())->add(),
     'admin/users/store' => (new UsersController())->store(),
-    'admin/users/edit' => (new UsersController())->edit(),
-    'admin/users/update' => (new UsersController())->update(),
     'admin/users/delete' => (new UsersController())->delete(),
 
+    // danh mcuj
+    'admin/categories' => (new CategoriesController())->index(),
+    'admin/categories/add' => (new CategoriesController())->add(),
+    'admin/categories/store' => (new CategoriesController())->store(),
+    'admin/categories/edit' => (new CategoriesController())->edit(),
+    'admin/categories/delete' => (new CategoriesController())->delete(),
 
 
-    // Dashboard (Admin)
-    'admin'           => (new DashboardController())->index(),
-    'admin/dashboard' => (new DashboardController())->index(),
+
+
+    // Dashboard (Admin) — chặn ngay tại đây
+    'admin' => (function () {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        if (empty($_SESSION['user'])) {
+            header("Location: index.php?act=login");
+            exit();
+        }
+
+        if (strtolower(trim($_SESSION['user']['role'] ?? '')) !== 'admin') {
+            http_response_code(403);
+            echo "<div style='
+            font-family: Arial, sans-serif;
+            background: #fff3f3;
+            color: #d8000c;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border: 1px solid #d8000c;
+            border-radius: 8px;
+            text-align: center;
+        '>
+            <h2>🚫 Truy cập bị từ chối</h2>
+            <p>Bạn không có quyền truy cập vào khu vực quản trị.</p>
+            <a href='index.php?act=home' style='
+                display:inline-block;
+                margin-top: 12px;
+                background: #d8000c;
+                color: white;
+                padding: 8px 14px;
+                border-radius: 6px;
+                text-decoration: none;
+            '>Quay về trang chủ</a>
+        </div>";
+            exit();
+        }
+
+        (new DashboardController())->index();
+    })(),
+
+    'admin/dashboard' => (function () {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        if (empty($_SESSION['user'])) {
+            header("Location: index.php?act=login");
+            exit();
+        }
+
+        if (strtolower(trim($_SESSION['user']['role'] ?? '')) !== 'admin') {
+            http_response_code(403);
+            echo "<div style='
+            font-family: Arial, sans-serif;
+            background: #fff3f3;
+            color: #d8000c;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border: 1px solid #d8000c;
+            border-radius: 8px;
+            text-align: center;
+        '>
+            <h2>🚫 Truy cập bị từ chối</h2>
+            <p>Bạn không có quyền truy cập vào khu vực quản trị.</p>
+            <a href='index.php?act=home' style='
+                display:inline-block;
+                margin-top: 12px;
+                background: #d8000c;
+                color: white;
+                padding: 8px 14px;
+                border-radius: 6px;
+                text-decoration: none;
+            '>Quay về trang chủ</a>
+        </div>";
+            exit();
+        }
+
+        (new DashboardController())->index();
+    })(),
 };

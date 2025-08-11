@@ -169,10 +169,25 @@
                 return;
             }
 
+            // Lấy user theo email (bao gồm cả role)
             $user = $this->modelUser->findByEmail($email);
 
-            if ($user && isset($user['password']) && password_verify($password, $user['password'])) {
-                $_SESSION['user'] = $user;
+            if ($user && !empty($user['password']) && password_verify($password, $user['password'])) {
+
+                // Lưu đủ thông tin cần dùng
+                $_SESSION['user'] = [
+                    'id'    => $user['id'],
+                    'email' => $user['email'],
+                    'role'  => $user['role'] ?? 'user'
+                ];
+
+                // Nếu muốn chặn admin đăng nhập khu vực user (tùy nhu cầu)
+                // if ($_SESSION['user']['role'] === 'admin') {
+                //     // Ví dụ: chuyển thẳng sang trang admin
+                //     header("Location: index.php?act=admin");
+                //     exit();
+                // }
+
                 header("Location: ?act=home");
                 exit();
             } else {
@@ -180,6 +195,7 @@
                 require './views/auth/login.php';
             }
         }
+
 
         public function logout(): never
         {

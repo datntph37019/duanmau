@@ -34,12 +34,12 @@ class UsersController
         include './views/admin/layout.php';
     }
 
-    public function update()
-    {
-        (new UsersModel())->updateUser($_POST['id'], $_POST);
-        header('Location: index.php?act=admin/users');
-        exit;
-    }
+    // public function update()
+    // {
+    //     (new UsersModel())->updateUser($_POST['id'], $_POST);
+    //     header('Location: index.php?act=admin/users');
+    //     exit;
+    // }
 
     public function delete()
     {

@@ -36,27 +36,27 @@ class UsersModel
         ]);
     }
 
-    public function updateUser($id, $data)
-    {
-        if (!empty($data['password'])) {
-            $sql = "UPDATE users SET  email = ?, password = ?, role = ? WHERE id = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                $data['email'],
-                password_hash($data['password'], PASSWORD_DEFAULT),
-                $data['role'],
-                $id
-            ]);
-        } else {
-            $sql = "UPDATE users SET email = ?, role = ? WHERE id = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                $data['email'],
-                $data['role'],
-                $id
-            ]);
-        }
-    }
+    // public function updateUser($id, $data)
+    // {
+    //     if (!empty($data['password'])) {
+    //         $sql = "UPDATE users SET  email = ?, password = ?, role = ? WHERE id = ?";
+    //         $stmt = $this->conn->prepare($sql);
+    //         $stmt->execute([
+    //             $data['email'],
+    //             password_hash($data['password'], PASSWORD_DEFAULT),
+    //             $data['role'],
+    //             $id
+    //         ]);
+    //     } else {
+    //         $sql = "UPDATE users SET email = ?, role = ? WHERE id = ?";
+    //         $stmt = $this->conn->prepare($sql);
+    //         $stmt->execute([
+    //             $data['email'],
+    //             $data['role'],
+    //             $id
+    //         ]);
+    //     }
+    // }
 
     public function deleteUser($id)
     {
