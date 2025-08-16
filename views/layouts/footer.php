@@ -40,13 +40,37 @@
 </body>
 
 </html> -->
-<footer style="
-    background-color: #222;
-    color: #fff;
-    text-align: center;
-    padding: 16px 0;
-    font-size: 14px;
-    border-top: 3px solid #444;
-">
-    <p>&copy; 2025 - Website bán quần áo</p>
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1;
+        /* đẩy footer xuống cuối */
+    }
+
+    footer {
+        background-color: #222;
+        color: #ccc;
+        font-size: 14px;
+        text-align: center;
+        padding: 12px 0;
+    }
+
+    footer p {
+        margin: 0;
+    }
+</style>
+
+<main>
+    <!-- Nội dung trang của bạn -->
+</main>
+
+<footer>
+    <p>© 2025 - Website bán quần áo | Thiết kế bởi Poly Store</p>
 </footer>

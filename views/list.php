@@ -7,13 +7,13 @@
         padding: 0;
         box-sizing: border-box;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f8f9fa;
+        background-color: #e9e5e5ff;
         overflow-x: hidden;
     }
 
     h2 {
         text-align: center;
-        color: #2c3e50;
+        color: #6a829bff;
         margin-top: 40px;
         font-size: 28px;
         font-weight: 700;
@@ -31,7 +31,7 @@
 
     .category-filter a {
         padding: 10px 18px;
-        background-color: #a8b0b8ff;
+        background-color: #688db3ff;
         color: white;
         border-radius: 8px;
         text-decoration: none;
@@ -41,7 +41,7 @@
 
     .category-filter a:hover,
     .category-filter a.active {
-        background-color: #59656dff;
+        /* background-color: #59656dff; */
     }
 
     .products-container {
@@ -123,7 +123,7 @@
 <h3>d</h3>
 
 <div class="category-filter">
-    <a href="?act=products" class="<?= !isset($_GET['category_id']) ? 'active' : '' ?>">Tất cả</a>
+    <a href="?act=products" class="<?= !isset($_GET['category_id']) ? 'active' : '' ?>">Tất cả sản phẩm</a>
     <?php foreach ($categories as $cat): ?>
         <a href="?act=products&category_id=<?= $cat['id'] ?>" class="<?= (isset($_GET['category_id']) && $_GET['category_id'] == $cat['id']) ? 'active' : '' ?>">
             <?= htmlspecialchars($cat['ten_danh_muc']) ?>

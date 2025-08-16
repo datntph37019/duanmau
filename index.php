@@ -11,7 +11,15 @@ require_once './controllers/HomeController.php';
 require_once './controllers/AdminProductController.php';
 require_once './controllers/UserController.php';
 require_once './controllers/ProductController.php';
+require_once './controllers/ContactController.php';
+require_once './controllers/AboutController.php';
 
+
+
+
+
+
+//controller/admin/...
 require_once './controllers/admin/DashboardController.php';
 require_once './controllers/admin/ProductsController.php';
 require_once './controllers/admin/UsersController.php';
@@ -43,6 +51,8 @@ match ($act) {
     'home' => (new HomeController())->index(),
     'products' => (new ProductController())->index(),
     'product/detail' => (new ProductController())->detail(),
+    'contact' => (new ContactController())->index(),
+    'about' => (new AboutController())->index(),
 
 
 

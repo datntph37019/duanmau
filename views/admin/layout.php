@@ -51,6 +51,23 @@
             padding: 10px 20px;
             border-bottom: 1px solid #bdc3c7;
         }
+
+        .btn-home {
+            background-color: #dae4b5ff;
+            color: white;
+            padding: 8px 16px;
+            margin-left: 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-home:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 
@@ -73,6 +90,9 @@
             $role  = ucfirst($_SESSION['user']['role'] ?? 'Không xác định'); // ucfirst để chữ cái đầu viết hoa
             ?>
             <span>Xin chào, <?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($role, ENT_QUOTES, 'UTF-8') ?>)</span>
+            <a href="http://localhost/duanmau1/index.php?act=home" class="btn-home">
+                <i class="fas fa-arrow-left"></i> Về trang chủ
+            </a>
         </div>
         <div class="content">
             <?php include $viewFile; ?>
